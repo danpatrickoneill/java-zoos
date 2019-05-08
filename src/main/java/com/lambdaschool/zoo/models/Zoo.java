@@ -35,6 +35,13 @@ public class Zoo
         this.animals = animals;
     }
 
+    public Zoo(Zoo zoo)
+    {
+        this.zooname = zoo.getZooname();
+        this.telephones = zoo.getTelephones();
+        this.animals = zoo.getAnimals();
+    }
+
     public long getZooid()
     {
         return zooid;
