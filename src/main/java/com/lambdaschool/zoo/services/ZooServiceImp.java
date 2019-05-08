@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 
 @Service(value = "zooService")
@@ -56,5 +57,15 @@ public class ZooServiceImp implements ZooService
     public Zoo update(Zoo zoo, long id)
     {
         return null;
+    }
+
+    @Override
+    public void delete(long id)
+    {
+        if (zoorepo.findById(id).isPresent()) {
+            zoorepo.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Couldn't find zoo with id: " + id);
+        }
     }
 }

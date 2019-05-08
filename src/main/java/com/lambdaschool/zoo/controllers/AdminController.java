@@ -27,7 +27,7 @@ public class AdminController
     //     return new ResponseEntity<>(zooService.findAll(), HttpStatus.OK);
     // }
 
-    @PostMapping(value = "/zoos/", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/zoos", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> addZoo(@Valid
                                     @RequestBody Zoo zoo) throws URISyntaxException
     {
@@ -38,5 +38,12 @@ public class AdminController
         URI newZooURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{zooid}").buildAndExpand(newZoo.getZooid()).toUri();
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/zoos/{id}")
+    public ResponseEntity<?> deleteZoo(@PathVariable long id)
+    {
+        zooService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

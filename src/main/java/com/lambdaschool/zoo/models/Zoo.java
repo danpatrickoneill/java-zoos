@@ -16,11 +16,14 @@ public class Zoo
 
     private String zooname;
 
-    @OneToMany(mappedBy = "zoo")
+    @OneToMany(mappedBy = "zoo",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties("zoo")
     private List<Telephone> telephones = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "zoos")
+    @ManyToMany(mappedBy = "zoos",
+            cascade = CascadeType.ALL)
     @JsonIgnoreProperties("zoos")
     private List<Animal> animals = new ArrayList<>();
 
